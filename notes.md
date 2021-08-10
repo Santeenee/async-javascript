@@ -41,3 +41,24 @@ guess what, with `console.log(request)` in a proper event listener, we can see t
     it means that the request is complete
 
     theen it's time to do something with that data.
+
+---
+
+## Status codes
+
+I already know them. let's revise them
+
+- 100 means infos
+- 200 means success
+- 300 means redirect
+- 400 means client error
+- 500 means server error
+
+> Actually, when the ready-state is 4
+> the request is completed even if the url is incorrect.
+>
+> In that case, we get an empty object as a response.
+>
+> That's an issue!
+> To solve that issue we can say that we handle data only if
+> the status code is 200 ( --> success)

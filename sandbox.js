@@ -7,9 +7,14 @@ request.addEventListener("readystatechange", () => {
   /*console.log(request, request.readyState);*/
 
   //if the request is complete
-  if (request.readyState === 4) {
+  if (request.readyState === 4 && request.status === 200) {
     //getting the actual response
-    console.log(request.responseText);
+    console.log(request, request.responseText);
+  } else if (request.readyState === 4) {
+    console.log(
+      `could not fetch the data, status %c${request.status}`,
+      "color: red; background: yellow;"
+    );
   }
 });
 
