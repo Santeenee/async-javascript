@@ -60,5 +60,5 @@ I already know them. let's revise them
 > In that case, we get an empty object as a response.
 >
 > That's an issue!
-> To solve that issue we can say that we handle data only if
+> To solve that issue we handle the data only if
 > the status code is 200 ( --> success)
