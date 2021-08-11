@@ -39,7 +39,7 @@ guess what, with `console.log(request)` in a proper event listener, we can see t
 ### if (ready state == 4)
 
     it means that the request is complete
-    
+
     then it's time to do something with that data.
 
 ---
@@ -64,3 +64,32 @@ easy
     That's an issue!
     To solve that issue we handle the data only if
     the status code is 200 ( --> success)
+
+---
+
+## Callback Functions
+
+cutted and pasted all the code in a function named `getTodos()`
+
+=> reusable code
+
+now we can pass a callback function as an argument to `getTodos()`!
+
+```javascript
+const getTodos = (callback) => {
+  //...
+  if (request.readyState === 4 && request.status === 200) {
+    callback(undefined, request.responseText);
+  } else if (request.readyState === 4) {
+    callback(`could not fetch data, status ${request.status}`, undefined);
+  }
+  //...
+};
+
+getTodos((err, data) => {
+  console.log("Callback fired");
+
+  if (err) console.log(err);
+  else console.log(data);
+});
+```
