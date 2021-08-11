@@ -36,11 +36,11 @@ guess what, with `console.log(request)` in a proper event listener, we can see t
 
 ![ready states of a xml-http request](ready-states-of-a-XMLHttpRequest.png)
 
-#### if (ready state == 4)
+### if (ready state == 4)
 
     it means that the request is complete
-
-    theen it's time to do something with that data.
+    
+    then it's time to do something with that data.
 
 ---
 
@@ -54,11 +54,13 @@ I already know them. let's revise them
 - 400 means client error
 - 500 means server error
 
-> Actually, when the ready-state is 4
-> the request is completed even if the url is incorrect.
->
-> In that case, we get an empty object as a response.
->
-> That's an issue!
-> To solve that issue we handle the data only if
-> the status code is 200 ( --> success)
+easy
+
+    Actually, when the ready-state is 4
+    the request is completed even if the url is incorrect.
+
+    In that case, we get an empty object as a response.
+
+    That's an issue!
+    To solve that issue we handle the data only if
+    the status code is 200 ( --> success)
