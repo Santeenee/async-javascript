@@ -1,4 +1,4 @@
-# Async Javascript notes
+# 1. Async Javascript notes
 
 One of the most important part of JavaScript
 
@@ -19,7 +19,7 @@ this is solved letting the browser handle the request of data while your code is
 
 ---
 
-## HTTP request
+## 2. HTTP request
 
 - get data from another server
 - so... requests to API endpoints
@@ -44,7 +44,7 @@ guess what, with `console.log(request)` in a proper event listener, we can see t
 
 ---
 
-## Status codes
+## 3. Status codes
 
 I already know them. let's revise them
 
@@ -67,7 +67,7 @@ easy
 
 ---
 
-## Callback Functions
+## 4. Callback Functions
 
 cutted and pasted all the code in a function named `getTodos()`
 
@@ -96,10 +96,28 @@ getTodos((err, data) => {
 
 ---
 
-## Using JSON data
+## 5. Using JSON data
 
 by using the `JSON.parse()` method,
 we convert json data to javascript arrays and objects that can be actually used
 
 we can also create our own json file easily...
 Just remember to wrap everything in double-quotes!
+
+---
+
+## 6. Callback Hell
+
+Created a folder containing 3 json files
+
+> At some point in the future, it can happen that
+> you make a request to an API and then use the data that the > API gave you to make another request, this time to a different API...
+
+Making all the request in turn.
+One request after the other is finished.
+
+I'm trying to do the same.
+
+unfotunately, I have to nest every `getTodos()` in to the other...
+
+or do I?

@@ -1,4 +1,4 @@
-const getTodos = (callback) => {
+const getTodos = (resource, callback) => {
   //create the request object
   const request = new XMLHttpRequest();
 
@@ -21,15 +21,27 @@ const getTodos = (callback) => {
   });
 
   //setting up the request
-  request.open("GET", "todos.json");
+  request.open("GET", resource);
 
   //guess what? it sends the request. so easy!
   request.send();
 };
 
-//convention: first the error, than the data
-getTodos((err, data) => {
-  console.log("Callback fired");
-  if (err) console.log(err);
-  else console.log(data);
+/* 
+ ________  ________  ___       ___       ________  ________  ________  ___  __            ___  ___  _______   ___       ___
+|\   ____\|\   __  \|\  \     |\  \     |\   __  \|\   __  \|\   ____\|\  \|\  \         |\  \|\  \|\  ___ \ |\  \     |\  \
+\ \  \___|\ \  \|\  \ \  \    \ \  \    \ \  \|\ /\ \  \|\  \ \  \___|\ \  \/  /|_       \ \  \\\  \ \   __/|\ \  \    \ \  \
+ \ \  \    \ \   __  \ \  \    \ \  \    \ \   __  \ \   __  \ \  \    \ \   ___  \       \ \   __  \ \  \_|/_\ \  \    \ \  \
+  \ \  \____\ \  \ \  \ \  \____\ \  \____\ \  \|\  \ \  \ \  \ \  \____\ \  \\ \  \       \ \  \ \  \ \  \_|\ \ \  \____\ \  \____
+   \ \_______\ \__\ \__\ \_______\ \_______\ \_______\ \__\ \__\ \_______\ \__\\ \__\       \ \__\ \__\ \_______\ \_______\ \_______\
+    \|_______|\|__|\|__|\|_______|\|_______|\|_______|\|__|\|__|\|_______|\|__| \|__|        \|__|\|__|\|_______|\|_______|\|_______|
+*/
+getTodos("todos/luigi.json", (err, data) => {
+  console.log(data);
+  getTodos("todos/mario.json", (err, data) => {
+    console.log(data);
+    getTodos("todos/shaun.json", (err, data) => {
+      console.log(data);
+    });
+  });
 });
