@@ -111,7 +111,8 @@ Just remember to wrap everything in double-quotes!
 Created a folder containing 3 json files
 
 > At some point in the future, it can happen that
-> you make a request to an API and then use the data that the > API gave you to make another request, this time to a different API...
+> you make a request to an API and then use the data that the
+> API gave you to make another request, this time to a different API...
 
 Making all the request in turn.
 One request after the other is finished.
@@ -121,3 +122,24 @@ I'm trying to do the same.
 unfotunately, I have to nest every `getTodos()` in to the other...
 
 or do I?
+
+---
+
+## 7. Promises
+
+A promise is a task that takes some time to do,
+
+a promise can either be
+
+- RESOLVED -> we get the data we want
+- REJECTED -> some error
+
+`resolved()` and `rejected()` are also two built in methods in JS
+
+when the promise is completed, we can use the **`.then()`** method
+
+it can take two arguments that are callback functions.
+The first is called when the promise is _resolved_,
+the second one when is _rejected_
+
+to make things more clear, we can use `.then()` with only one parameter to call when the promise is _resolved_, and use the **`.catch()`** method when is _rejected_

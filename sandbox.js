@@ -27,21 +27,30 @@ const getTodos = (resource, callback) => {
   request.send();
 };
 
-/* 
- ________  ________  ___       ___       ________  ________  ________  ___  __            ___  ___  _______   ___       ___
-|\   ____\|\   __  \|\  \     |\  \     |\   __  \|\   __  \|\   ____\|\  \|\  \         |\  \|\  \|\  ___ \ |\  \     |\  \
-\ \  \___|\ \  \|\  \ \  \    \ \  \    \ \  \|\ /\ \  \|\  \ \  \___|\ \  \/  /|_       \ \  \\\  \ \   __/|\ \  \    \ \  \
- \ \  \    \ \   __  \ \  \    \ \  \    \ \   __  \ \   __  \ \  \    \ \   ___  \       \ \   __  \ \  \_|/_\ \  \    \ \  \
-  \ \  \____\ \  \ \  \ \  \____\ \  \____\ \  \|\  \ \  \ \  \ \  \____\ \  \\ \  \       \ \  \ \  \ \  \_|\ \ \  \____\ \  \____
-   \ \_______\ \__\ \__\ \_______\ \_______\ \_______\ \__\ \__\ \_______\ \__\\ \__\       \ \__\ \__\ \_______\ \_______\ \_______\
-    \|_______|\|__|\|__|\|_______|\|_______|\|_______|\|__|\|__|\|_______|\|__| \|__|        \|__|\|__|\|_______|\|_______|\|_______|
-*/
-getTodos("todos/luigi.json", (err, data) => {
-  console.log(data);
-  getTodos("todos/mario.json", (err, data) => {
-    console.log(data);
-    getTodos("todos/shaun.json", (err, data) => {
-      console.log(data);
-    });
+//PROMISES
+const getSomething = () => {
+  return new Promise((resolve, reject) => {
+    //fetch something
+    resolve("some data");
+    //reject("some error");
   });
-});
+};
+
+//not clean enough version
+/*getSomething().then(
+  (data) => {
+    console.log(data);
+  },
+  (err) => {
+    console.log(err);
+  }
+);*/
+
+//better version ⤵
+getSomething()
+  .then((data) => {
+    console.log(data);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
