@@ -93,3 +93,13 @@ getTodos((err, data) => {
   else console.log(data);
 });
 ```
+
+---
+
+## Using JSON data
+
+by using the `JSON.parse()` method,
+we convert json data to javascript arrays and objects that can be actually used
+
+we can also create our own json file easily...
+Just remember to wrap everything in double-quotes!

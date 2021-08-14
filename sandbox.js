@@ -9,7 +9,8 @@ const getTodos = (callback) => {
 
     //if the request is complete
     if (request.readyState === 4 && request.status === 200) {
-      callback(undefined, request.responseText);
+      data = JSON.parse(request.responseText);
+      callback(undefined, data);
     } else if (request.readyState === 4) {
       /*console.log(
         `could not fetch the data, status %c${request.status}`,
@@ -20,14 +21,11 @@ const getTodos = (callback) => {
   });
 
   //setting up the request
-  request.open("GET", "https://jsonplaceholder.typicode.com/todos/");
+  request.open("GET", "todos.json");
 
   //guess what? it sends the request. so easy!
   request.send();
 };
-
-console.log(1);
-console.log(2);
 
 //convention: first the error, than the data
 getTodos((err, data) => {
@@ -35,6 +33,3 @@ getTodos((err, data) => {
   if (err) console.log(err);
   else console.log(data);
 });
-
-console.log(3);
-console.log(4);
