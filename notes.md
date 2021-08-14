@@ -142,4 +142,4 @@ it can take two arguments that are callback functions.
 The first is called when the promise is _resolved_,
 the second one when is _rejected_
 
-to make things more clear, we can use `.then()` with only one parameter to call when the promise is _resolved_, and use the **`.catch()`** method when is _rejected_
+to make things more clear, we can use `.then()` with only one parameter to call when the promise is _resolved_, and use the **`.catch()`** method when it is _rejected_
