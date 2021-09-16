@@ -1,4 +1,6 @@
-# 1. Async Javascript notes
+# Async Javascript notes
+
+## 1. Intro
 
 One of the most important part of JavaScript
 
@@ -143,3 +145,35 @@ The first is called when the promise is _resolved_,
 the second one when is _rejected_
 
 to make things more clear, we can use `.then()` with only one parameter to call when the promise is _resolved_, and use the **`.catch()`** method when it is _rejected_
+
+---
+
+## 8. Chaining Promises
+
+You can attach a `return` value and attach the `.then()` method again and it becomes less of a mess of the last time. -\_-
+
+You don't need several `.catch()` methods, you only need one.
+It does aaall the work for you.
+(guess what, it catches all the errors)
+
+```javascript
+getTodos("todos/luigi.json")
+  .then((data) => {
+    console.log("promise 1 resolved:", data);
+    return getTodos("todos/mario.json");
+  })
+  .then((data) => {
+    console.log("promise 2 resolved:", data);
+    return getTodos("todos/shaun.json");
+  })
+  .then((data) => {
+    console.log("promise 3 resolved:", data);
+  })
+  .catch((err) => {
+    console.log("promise rejected:", err);
+  });
+```
+
+---
+
+## 9. The Fetch API
