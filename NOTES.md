@@ -328,7 +328,9 @@ That implies `err.message` saying that there is an error in the JSON.
 
 **`rejected: Unexpected token < in JSON at position 0`**
 
-Which is not true, the problem sits in the url.
+It seems like we have a misleading error message...
+
+However we know the problem sits in the url.
 
 To overcome this, we have to manually check if the second promise has a status code of 200 or not... Using basic `if` statements...
 
