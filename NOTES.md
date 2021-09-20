@@ -290,7 +290,7 @@ console.log(4)
 
 #### As you can see, the asynchronous function doesn't block any code whatsoever.
 
-![a browser dev-tools console](img/dev-tools_console.png 'a browser dev-tools console')
+![the beauty of non blocking code](img/the-beauty-of-non-blocking-code.png 'a browser dev-tools console')
 
 ### Recap
 
@@ -301,3 +301,97 @@ console.log(4)
 - The code is more readable
 
 ---
+
+## 11. Throwing Errors
+
+Using `catch` to find errors in the code.
+
+`err.message` comes in handy.
+
+```javascript
+getTodos('todos/luigi.json')
+	.then(data => console.log('resolved:', data))
+	.catch(err => console.log('rejected:', err.message))
+```
+
+However, when we use `fetch('a/path')`, even if the path passed in is wrong, the promise is still resolved, then is converted in JSON with the `.json()` method and therefore _that second promise_ is rejected.
+
+```javascript
+//Resolved even if the path is wrong
+const response = await fetch('wrong/path')
+
+//Rejected, throws error
+const data = await response.json()
+```
+
+That implies `err.message` saying that there is an error in the JSON.
+
+**`rejected: Unexpected token < in JSON at position 0`**
+
+Which is not true, the problem sits in the url.
+
+To overcome this, we have to manually check if the second promise has a status code of 200 or not... Using basic `if` statements...
+
+...And a new keyword --> **`throw`**
+
+`throw` lets you throw an error whenever you need it.
+
+(And that async func becomes automatically rejected)
+
+```javascript
+// [...]
+const response = await fetch(todo)
+
+if (response.status !== 200) {
+	throw new Error('cannot fetch the data')
+}
+
+const data = await response.json()
+// [...]
+```
+
+The `Error('cannot fetch the data')` message becomes the `err.message` while catching the error.
+`//output -> rejected: cannot fetch the data`
+
+We can use **`!response.ok`** instead of `response.status !== 200`
+
+### [Response.ok](https://developer.mozilla.org/en-US/docs/Web/API/Response/ok)
+
+"The ok read-only property of the Response interface contains a Boolean stating whether the response was successful (status in the range 200-299) or not."
+
+### Now let's take a look at everything we have done
+
+```javascript
+const getTodos = async todo => {
+	//
+	const response = await fetch(todo)
+
+	if (!response.ok) {
+		throw new Error('cannot fetch the data ＞︿＜')
+	}
+
+	const data = await response.json()
+
+	return data
+}
+
+getTodos('todos/luigi.json')
+	.then(data => console.log('resolved:', data))
+	.catch(err => console.log('rejected:', err.message))
+
+/*************
+ * In case of a wrong path
+ * ***********/
+
+//OUTPUT
+//rejected: cannot fetch the data ＞︿＜
+
+/*************
+ * Correct path but JSON file with errors
+ * *************/
+
+//OUTPUT
+//rejected: Unexpected token e in JSON at position 5
+```
+
+## THE END
