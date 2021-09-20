@@ -36,7 +36,7 @@ we can see the GET request made and all the details in the 'headers' inner-tab
 however, we can log the data on the console.
 guess what, with `console.log(request)` in a proper event listener, we can see the data in the console.
 
-![ready states of a xml-http request](ready-states-of-a-XMLHttpRequest.png)
+![ready states of a xml-http request](img/ready-states-of-a-XMLHttpRequest.png 'ready states of a xml-http request')
 
 ### if (ready state == 4)
 
@@ -78,22 +78,22 @@ cutted and pasted all the code in a function named `getTodos()`
 now we can pass a callback function as an argument to `getTodos()`!
 
 ```javascript
-const getTodos = (callback) => {
-  //...
-  if (request.readyState === 4 && request.status === 200) {
-    callback(undefined, request.responseText);
-  } else if (request.readyState === 4) {
-    callback(`could not fetch data, status ${request.status}`, undefined);
-  }
-  //...
-};
+const getTodos = callback => {
+	//...
+	if (request.readyState === 4 && request.status === 200) {
+		callback(undefined, request.responseText)
+	} else if (request.readyState === 4) {
+		callback(`could not fetch data, status ${request.status}`, undefined)
+	}
+	//...
+}
 
 getTodos((err, data) => {
-  console.log("Callback fired");
+	console.log('Callback fired')
 
-  if (err) console.log(err);
-  else console.log(data);
-});
+	if (err) console.log(err)
+	else console.log(data)
+})
 ```
 
 ---
@@ -157,21 +157,21 @@ It does aaall the work for you.
 (guess what, it catches all the errors)
 
 ```javascript
-getTodos("todos/luigi.json")
-  .then((data) => {
-    console.log("promise 1 resolved:", data);
-    return getTodos("todos/mario.json");
-  })
-  .then((data) => {
-    console.log("promise 2 resolved:", data);
-    return getTodos("todos/shaun.json");
-  })
-  .then((data) => {
-    console.log("promise 3 resolved:", data);
-  })
-  .catch((err) => {
-    console.log("promise rejected:", err);
-  });
+getTodos('todos/luigi.json')
+	.then(data => {
+		console.log('promise 1 resolved:', data)
+		return getTodos('todos/mario.json')
+	})
+	.then(data => {
+		console.log('promise 2 resolved:', data)
+		return getTodos('todos/shaun.json')
+	})
+	.then(data => {
+		console.log('promise 3 resolved:', data)
+	})
+	.catch(err => {
+		console.log('promise rejected:', err)
+	})
 ```
 
 ---
@@ -187,61 +187,117 @@ Which is a lot less code to write, and possibly funnier for me.
 ### Before
 
 ```javascript
-const getTodos = (resource) => {
-  return new Promise((resolve, reject) => {
-    //create the request object
-    const request = new XMLHttpRequest();
+const getTodos = resource => {
+	return new Promise((resolve, reject) => {
+		//create the request object
+		const request = new XMLHttpRequest()
 
-    //whenever the data comes back, it fires this event listener
-    request.addEventListener("readystatechange", () => {
-      //if the request is complete
-      if (request.readyState === 4 && request.status === 200) {
-        data = JSON.parse(request.responseText);
-        resolve(data);
-      } else if (request.readyState === 4) {
-        reject("error getting resource");
-      }
-    });
+		//whenever the data comes back, it fires this event listener
+		request.addEventListener('readystatechange', () => {
+			//if the request is complete
+			if (request.readyState === 4 && request.status === 200) {
+				data = JSON.parse(request.responseText)
+				resolve(data)
+			} else if (request.readyState === 4) {
+				reject('error getting resource')
+			}
+		})
 
-    //setting up the request
-    request.open("GET", resource);
+		//setting up the request
+		request.open('GET', resource)
 
-    //guess what? it sends the request. so easy!
-    request.send();
-  });
-};
+		//guess what? it sends the request. so easy!
+		request.send()
+	})
+}
 
-getTodos("todos/luigi.json")
-  .then((data) => {
-    console.log("promise 1 resolved:", data);
-    return getTodos("todos/mario.json");
-  })
-  .then((data) => {
-    console.log("promise 2 resolved:", data);
-    return getTodos("todos/shaun.json");
-  })
-  .then((data) => {
-    console.log("promise 3 resolved:", data);
-  })
-  .catch((err) => {
-    console.log("promise rejected:", err);
-  });
+getTodos('todos/luigi.json')
+	.then(data => {
+		console.log('promise 1 resolved:', data)
+		return getTodos('todos/mario.json')
+	})
+	.then(data => {
+		console.log('promise 2 resolved:', data)
+		return getTodos('todos/shaun.json')
+	})
+	.then(data => {
+		console.log('promise 3 resolved:', data)
+	})
+	.catch(err => {
+		console.log('promise rejected:', err)
+	})
 ```
 
 ### After
 
 ```javascript
-fetch("todos/luigi.json")
-  .then((response) => {
-    console.log("resolved", response);
-    return response.json();
-  })
-  .then((data) => {
-    console.log(data);
-  })
-  .catch((err) => {
-    console.log("rejected", err);
-  });
+fetch('todos/luigi.json')
+	.then(response => {
+		console.log('resolved', response)
+		return response.json()
+	})
+	.then(data => {
+		console.log(data)
+	})
+	.catch(err => {
+		console.log('rejected', err)
+	})
 ```
+
+---
+
+## 10. Async and Await
+
+Async and Await are two different features recently added to the language.
+
+They allow an easier use of chaining promises.
+
+The **`await`** keyword, stops the assignment of a certain promise to a variable(?) until the promise is fulfilled.
+
+```javascript
+const response = await fetch('todos/luigi.json')
+```
+
+The peculiarity of using the **`async`** keyword aswell, is that the function becomes asynchronous.
+
+Wow, who would have thought.
+
+Anyway, that means the `await` keyword doesn't create _blocking code_ (bad stuff explained at the start of this markdown file).
+
+Which means that javascript can be multithreaded?
+
+The `async` keyword makes the browser do all the work, which means that javascript can go on with all its functions and loops.
+
+Is that clearer?
+
+```javascript
+const getTodos = async todo => {
+	const response = await fetch(todo)
+	const data = await response.json()
+
+	return data
+}
+
+console.log(1)
+console.log(2)
+
+// non blocking code :>)
+getTodos('todos/luigi.json').then(data => console.log('resolved:', data))
+
+console.log(3)
+console.log(4)
+```
+
+#### As you can see, the asynchronous function doesn't block any code whatsoever.
+
+![a browser dev-tools console](img/dev-tools_console.png 'a browser dev-tools console')
+
+### Recap
+
+`async` and `await` just make your life a lot easier.
+
+- You have to write less code every time you need to chain promises
+- There is no blocking code
+- The code is more readable
 
 ---
