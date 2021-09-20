@@ -17,7 +17,7 @@ first understand synchronous code..
 
 this is solved letting the browser handle the request of data while your code is doing stuff, then, when the data is fetched, a callback function is called and it finishes what the original function wanted to do. kinda.
 
-"Start something now & finish it later"
+> Start something now & finish it later
 
 ---
 
@@ -357,7 +357,7 @@ We can use **`!response.ok`** instead of `response.status !== 200`
 
 ### [Response.ok](https://developer.mozilla.org/en-US/docs/Web/API/Response/ok)
 
-"The ok read-only property of the Response interface contains a Boolean stating whether the response was successful (status in the range 200-299) or not."
+> The ok read-only property of the Response interface contains a Boolean stating whether the response was successful (status in the range 200-299) or not.
 
 ### Now let's take a look at everything we have done
 
