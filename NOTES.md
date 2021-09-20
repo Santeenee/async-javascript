@@ -394,4 +394,8 @@ getTodos('todos/luigi.json')
 //rejected: Unexpected token e in JSON at position 5
 ```
 
+This is the output when all goes well (￣︶￣)
+
+![output getTodos async function](img/all-goes-well.png 'output getTodos async function')
+
 ## THE END
